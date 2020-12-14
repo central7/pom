@@ -1,0 +1,7 @@
+= POM Jamal Support Files
+
+This repository contains macro files that can be used to create `pom.xml.jam` files for Java Maven projects.
+The Java `pom.xml` file is an XML formatted file that contains information about the Java project.
+The XML description is verbose and sometimes redundant.
+Using the Jamal preprocessor this format can be managed in a more readable and easier to maintain source.
+
