@@ -77,12 +77,12 @@ the result (output) of the macro "for" is a series of "define" macros. Each defi
 with the name of the tag. When this is ready then this output is processed by the macro "eval"
 essentially executing the "define" macros and at this point the tags are defined as macros.
 
-{!@for $tag in (annotationProcessorPath,
+{!@for $tag in (annotationProcessor,
+                annotationProcessorPath,
                 annotationProcessorPaths,
-                annotationProcessor,
                 annotationProcessors,
-                argLine,
                 arg,
+                argLine,
                 artifactId,
                 build,
                 compilerArgs,
@@ -93,34 +93,52 @@ essentially executing the "define" macros and at this point the tags are defined
                 description,
                 developerConnection,
                 directory,
+                distributionManagement,
                 encoding,
                 exclude,
                 excludes,
+                execution,
+                executions,
+                extensions,
                 filtering,
                 goal,
                 goals,
                 groupId,
                 id,
+                name,
                 packaging,
+                phase,
                 plugin,
                 pluginManagement,
                 plugins,
                 profile,
                 profiles,
+                properties,
+                quiet,
                 release,
                 repositories,
                 resource,
                 resources,
-                scope,
                 scm,
+                scope,
+                show,
                 source,
                 target,
                 url,
                 version)=
 {@define $tag($x)=<$tag>{#if |$x|$x</$tag>}}}
+
+
+detectJavaApiLink has 'true' or 'false' as argument that way it cannot be tested in IF
+
+{@define detectJavaApiLink($x)=<detectJavaApiLink>$x</detectJavaApiLink>}
+
 ------------------------------------------------------------------------------------------------------------------------
+{@define profile($id,$content)=<profile><id>$id</id>content</profile>}
+{@define snapshotRepository($id,$url)=<snapshotRepository><id>$id</id><url>$url</url></snapshotRepository>}
 {@define repository($id,$url)=<repository><id>$id</id><url>$url</url></repository>}
 {@define profile($id)=<profile><id>$id</id>} end a profile with an [end profile]
+
 ------------------------------------------------------------------------------------------------------------------------
 
 The GAV macro can be used to define groupId, artifactId and version tags for the project. Each of the elements may be

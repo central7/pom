@@ -1,0 +1,2 @@
+{@import ../pom.jim}
+{detectJavaApiLink|false}
