@@ -77,7 +77,7 @@ the result (output) of the macro "for" is a series of "define" macros. Each defi
 with the name of the tag. When this is ready then this output is processed by the macro "eval"
 essentially executing the "define" macros and at this point the tags are defined as macros.
 
-{`@for $tag in (annotationProcessorPath,
+{!@for $tag in (annotationProcessorPath,
                 annotationProcessorPaths,
                 annotationProcessor,
                 annotationProcessors,

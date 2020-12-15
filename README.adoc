@@ -5,3 +5,6 @@ The Java `pom.xml` file is an XML formatted file that contains information about
 The XML description is verbose and sometimes redundant.
 Using the Jamal preprocessor this format can be managed in a more readable and easier to maintain source.
 
+
+https://raw.githubusercontent.com/jamalrepo/pom/main/pom.jim
+https://raw.githubusercontent.com/jamalrepo/pom/main/plugins/compiler.jim
