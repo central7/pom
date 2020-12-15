@@ -145,7 +145,7 @@ The GAV macro can be used to define groupId, artifactId and version tags for the
 missing, it is checked by the macro definitions using the 'if' macro. It is recommended to use : as argument separators
 for this macro in the pom.xml.jam
 
-The macro also defines the user defined macros GROUP_ID, ARTIFACT_ID and VERSION that is used by other macros, like
+The macro also defines the user defined macros GROUP_ID, ARTIFACT_ID and VERSION_ID that is used by other macros, like
 parent, when the group id, artifact id or version is not defined. Usually the parent has the same groupId and version
 as a subproject.
 
@@ -154,7 +154,7 @@ To skip the groupId, for example, you can write [GAV ::artifa-ct:1.0.0]
 {@define GAV($groupId,$artifactId,$version)=
     {#if|$groupId|{groupId $groupId}}{@define GROUP_ID=$groupId}
     {#if|$artifactId|{artifactId $artifactId}}{@define ARTIFACT_ID=$artifactId}
-    {#if|$version|{version $version}}{@define VERSION=$version}
+    {#if|$version|{version $version}}{@define VERSION_ID=$version}
 }
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ To skip the groupId, for example, you can write [GAV ::artifa-ct:1.0.0]
 {@define parent($groupId,$artifactId,$version)=<parent>
     {groupId {#if|$groupId|$groupId|{GROUP_ID}}}
     {artifactId {#if|$artifactId|$artifactId|{ARTIFACT_ID}}}
-    {version {#if|$version|$version|{VERSION}}}
+    {version {#if|$version|$version|{VERSION_ID}}}
 </parent>}
 
 ------------------------------------------------------------------------------------------------------------------------
