@@ -1,0 +1,53 @@
+
+
+<annotationProcessor>content</annotationProcessor><annotationProcessor>inline content</annotationProcessor>
+<annotationProcessorPath>content</annotationProcessorPath><annotationProcessorPath>inline content</annotationProcessorPath>
+<annotationProcessorPaths>content</annotationProcessorPaths><annotationProcessorPaths>inline content</annotationProcessorPaths>
+<annotationProcessors>content</annotationProcessors><annotationProcessors>inline content</annotationProcessors>
+<arg>content</arg><arg>inline content</arg>
+<argLine>content</argLine><argLine>inline content</argLine>
+<artifactId>content</artifactId><artifactId>inline content</artifactId>
+<build>content</build><build>inline content</build>
+<compilerArgs>content</compilerArgs><compilerArgs>inline content</compilerArgs>
+<configuration>content</configuration><configuration>inline content</configuration>
+<connection>content</connection><connection>inline content</connection>
+<dependencies>content</dependencies><dependencies>inline content</dependencies>
+<dependencyManagement>content</dependencyManagement><dependencyManagement>inline content</dependencyManagement>
+<description>content</description><description>inline content</description>
+<developerConnection>content</developerConnection><developerConnection>inline content</developerConnection>
+<directory>content</directory><directory>inline content</directory>
+<distributionManagement>content</distributionManagement><distributionManagement>inline content</distributionManagement>
+<encoding>content</encoding><encoding>inline content</encoding>
+<exclude>content</exclude><exclude>inline content</exclude>
+<excludes>content</excludes><excludes>inline content</excludes>
+<execution>content</execution><execution>inline content</execution>
+<executions>content</executions><executions>inline content</executions>
+<extensions>content</extensions><extensions>inline content</extensions>
+<filtering>content</filtering><filtering>inline content</filtering>
+<goal>content</goal><goal>inline content</goal>
+<goals>content</goals><goals>inline content</goals>
+<groupId>content</groupId><groupId>inline content</groupId>
+<id>content</id><id>inline content</id>
+<name>content</name><name>inline content</name>
+<packaging>content</packaging><packaging>inline content</packaging>
+<phase>content</phase><phase>inline content</phase>
+<plugin>content</plugin><plugin>inline content</plugin>
+<pluginManagement>content</pluginManagement><pluginManagement>inline content</pluginManagement>
+<plugins>content</plugins><plugins>inline content</plugins>
+<profile><id></id>content</profile><profile><id>inline content</id>
+<profiles>content</profiles><profiles>inline content</profiles>
+<properties>content</properties><properties>
+inline content
+</properties>
+<quiet>content</quiet><quiet>inline content</quiet>
+<release>content</release><release>inline content</release>
+<repositories>content</repositories><repositories>inline content</repositories>
+<resource>content</resource><resource>inline content</resource>
+<resources>content</resources><resources>inline content</resources>
+<scm>content</scm><scm>inline content</scm>
+<scope>content</scope><scope>inline content</scope>
+<show>content</show><show>inline content</show>
+<source>content</source><source>inline content</source>
+<target>content</target><target>inline content</target>
+<url>content</url><url>inline content</url>
+<version>content</version><version>inline content</version>

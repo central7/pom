@@ -10,7 +10,7 @@ In the comment parts the examples are using the [ and the ] characters as macro 
 
 To import this file the pom.xml.jam file should use the macro
 
-   [@import res:javax0/jamal/pomlib/pom.jim]
+   [@import ../pom.jim]
 
 and this file as a resource should be available on the class path.
 

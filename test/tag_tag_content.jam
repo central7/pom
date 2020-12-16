@@ -1,0 +1,56 @@
+{@import ../pom.jim}{@comment
+
+This file tests that a tag, defined in the pom.ji using the tag macro can be used empty, in which case the content will
+be inserted as after the macro and an [end tag] should be used at the end or with content.
+
+}
+
+{annotationProcessor}content{end annotationProcessor}{annotationProcessor inline content}
+{annotationProcessorPath}content{end annotationProcessorPath}{annotationProcessorPath inline content}
+{annotationProcessorPaths}content{end annotationProcessorPaths}{annotationProcessorPaths inline content}
+{annotationProcessors}content{end annotationProcessors}{annotationProcessors inline content}
+{arg}content{end arg}{arg inline content}
+{argLine}content{end argLine}{argLine inline content}
+{artifactId}content{end artifactId}{artifactId inline content}
+{build}content{end build}{build inline content}
+{compilerArgs}content{end compilerArgs}{compilerArgs inline content}
+{configuration}content{end configuration}{configuration inline content}
+{connection}content{end connection}{connection inline content}
+{dependencies}content{end dependencies}{dependencies inline content}
+{dependencyManagement}content{end dependencyManagement}{dependencyManagement inline content}
+{description}content{end description}{description inline content}
+{developerConnection}content{end developerConnection}{developerConnection inline content}
+{directory}content{end directory}{directory inline content}
+{distributionManagement}content{end distributionManagement}{distributionManagement inline content}
+{encoding}content{end encoding}{encoding inline content}
+{exclude}content{end exclude}{exclude inline content}
+{excludes}content{end excludes}{excludes inline content}
+{execution}content{end execution}{execution inline content}
+{executions}content{end executions}{executions inline content}
+{extensions}content{end extensions}{extensions inline content}
+{filtering}content{end filtering}{filtering inline content}
+{goal}content{end goal}{goal inline content}
+{goals}content{end goals}{goals inline content}
+{groupId}content{end groupId}{groupId inline content}
+{id}content{end id}{id inline content}
+{name}content{end name}{name inline content}
+{packaging}content{end packaging}{packaging inline content}
+{phase}content{end phase}{phase inline content}
+{plugin}content{end plugin}{plugin inline content}
+{pluginManagement}content{end pluginManagement}{pluginManagement inline content}
+{plugins}content{end plugins}{plugins inline content}
+{profile}content{end profile}{profile inline content}
+{profiles}content{end profiles}{profiles inline content}
+{properties}content{end properties}{properties inline content}
+{quiet}content{end quiet}{quiet inline content}
+{release}content{end release}{release inline content}
+{repositories}content{end repositories}{repositories inline content}
+{resource}content{end resource}{resource inline content}
+{resources}content{end resources}{resources inline content}
+{scm}content{end scm}{scm inline content}
+{scope}content{end scope}{scope inline content}
+{show}content{end show}{show inline content}
+{source}content{end source}{source inline content}
+{target}content{end target}{target inline content}
+{url}content{end url}{url inline content}
+{version}content{end version}{version inline content}

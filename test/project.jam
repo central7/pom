@@ -1,4 +1,4 @@
 {@import ../pom.jim}
-{project test}
- {packaging pom}
+{project testProject}
+
 {end project}

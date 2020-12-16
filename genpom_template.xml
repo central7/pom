@@ -1,14 +1,3 @@
-= POM Jamal Support Files
-
-This repository contains macro files that can be used to create `pom.xml.jam` files for Java Maven projects.
-The Java `pom.xml` file is an XML formatted file that contains information about the Java project.
-The XML description is verbose and sometimes redundant.
-Using the Jamal preprocessor this format can be managed in a more readable and easier to maintain source.
-
-To have short and readable `pom.xml.jam` files you should create a `genpom_template.xml` in your porject root directory.
-The content of the `genpom_template.xml` is the following:
-
-```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -22,13 +11,6 @@ The content of the `genpom_template.xml` is the following:
                 <groupId>com.javax0.jamal</groupId>
                 <artifactId>jamal-maven-plugin</artifactId>
                 <version>1.5.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.javax0.jamal</groupId>
-                        <artifactId>jamal-pomlib</artifactId>
-                        <version>1.0.0</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <id>execution</id>
@@ -53,20 +35,3 @@ The content of the `genpom_template.xml` is the following:
         </plugins>
     </build>
 </project>
-```
-
-When this file is there the command
-
-```
-mvn -f genpom.xml clean
-```
-
-will scan all the directories and convert all `pom.xml.jam` files to `pom.xml` file.
-
-You can add the generated `pom.xml` files to the source repository.
-The way anyone downloading your project can compile it without first generating the XML formatted POM from the Jamal source.
-The drawback is that you have to pay attention to re-run the above command whenever the pom changed.
-You also have to pay attention not to change the `pom.xml` files as they are generated in this case.
-
-https://raw.githubusercontent.com/jamalrepo/pom/main/pom.jim
-https://raw.githubusercontent.com/jamalrepo/pom/main/plugins/compiler.jim
