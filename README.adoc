@@ -1,72 +1,84 @@
 = POM Jamal Support Files
 
-This repository contains macro files that can be used to create `pom.xml.jam` files for Java Maven projects.
+This repository contains macro files that you can use to create `pom.xml.jam` files for Java Maven projects.
 The Java `pom.xml` file is an XML formatted file that contains information about the Java project.
 The XML description is verbose and sometimes redundant.
-Using the Jamal preprocessor this format can be managed in a more readable and easier to maintain source.
+Using the Jamal preprocessor, you can manage the project using this format more readable and more comfortable to maintain source.
 
-To have short and readable `pom.xml.jam` files you should create a `genpom_template.xml` in your porject root directory.
-The content of the `genpom_template.xml` is the following:
+You can edit your `pom.xml.jam` files with any text editor.
+Import the `https://raw.githubusercontent.com/jamalrepo/pom/main/pom.jim` into your Jamal file.
+Probably this will be the first line in your `pom.xml.jam` file.
+This file contains all the macros that can be used to describe the POM file in an effective manner.
+For example the Jamal project API has the following `pom.xml.jam` file:
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.javax0.jamal</groupId>
-    <artifactId>pom-xml-file-builder</artifactId>
-    <version>1.0.0</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.javax0.jamal</groupId>
-                <artifactId>jamal-maven-plugin</artifactId>
-                <version>1.5.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.javax0.jamal</groupId>
-                        <artifactId>jamal-pomlib</artifactId>
-                        <version>1.0.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>jamal</goal>
-                        </goals>
-                        <configuration>
-                            <formatOutput>true</formatOutput>
-                            <transformFrom>\.jam$</transformFrom>
-                            <transformTo></transformTo>
-                            <filePattern>.*pom\.xml\.jam$</filePattern>
-                            <exclude>target|\.iml$|\.java$|\.xml$</exclude>
-                            <sourceDirectory>.</sourceDirectory>
-                            <targetDirectory>.</targetDirectory>
-                            <macroOpen>{</macroOpen>
-                            <macroClose>}</macroClose>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+```
+{@import https://raw.githubusercontent.com/central7/pom/main/pom.jim}
+{@import ../version.jim}
+{project jamal api}
+    {packaging jar}
+    {GAV :com.javax0.jamal:jamal-api:{VERSION}}
+    {parent ::jamal-parent:}
+    {description|Jamal macro library API interfaces}
+    {@include ../plugins.jim}
+{end project}
 ```
 
-When this file is there the command
+Since this is a multi-module project, the file `../version.jim` contains the version definitions.
+The project name is `jamal api`.
+It is the argument of the macro project.
+This tag is closed with the `{end project}` macro.
+The packaging is defined in a simple macro `packaging`.
+The macro `GAV` is used to define the ``G``roup Id, ``A``rtifact Id, and the ``V``ersion.
+The macro `parent` is used to define the parent project.
+It can have three arguments for the group id, artifact id, and the version.
+If any of the arguments is missing or is the empty string, then the one declared in the last `GAV` macro is used.
+In this case the macro is equivalent to `{parent :com.javax0.jamal:jamal-parent:{VERSION}}`.
+Note that `VERSION` is defined in the file `../version.jim`.
+The macro `description` is used to define the project description.
+The file `../plugins.jim` is included, and it contains the plugins, which are the same for all the modules.
+All the modules `pom.xml.jam` file includes this file.
+
+To convert this `pom.xml.jam` file to `pom.xml` you can execute the command:
+
+```
+jshell https://raw.githubusercontent.com/central7/pom/main/genpom.jsh
+```
+
+It will download a `genpom.xml` file in the current working directory and then execute the
 
 ```
 mvn -f genpom.xml clean
 ```
 
-will scan all the directories and convert all `pom.xml.jam` files to `pom.xml` file.
+command.
+This command will clean the project and convert all the `pom.xml.jam` files found in the directories under the current working directory to `pom.xml`.
+You can execute the jshell command multiple times, or you can keep the downloaded `genpom.xml` and execute the `mvn -f genpom.xml clean` command directly.
+The second one is faster as it skips the downloading of the file.
 
-You can add the generated `pom.xml` files to the source repository.
-The way anyone downloading your project can compile it without first generating the XML formatted POM from the Jamal source.
-The drawback is that you have to pay attention to re-run the above command whenever the pom changed.
+To see the actual macros you can use, look at the `pom.jim` file in this repository.
+
+The subdirectory `plugins` contain macro definitions, which are Maven plugin specific.
+
+You can keep the `genpom.xml,` and the generated `pom.xml` files as an intermediary generated file.
+The option is that you add these files to the source repository.
+The first approach is cleaner, but in this case, the build chain uses extra tools, namely Jamal, which is, sadly, not an industry-standard tool.
+Following the second way, anyone downloading your project can compile it without first generating the XML formatted POM from the Jamal source.
+The drawback is that you have to pay attention to re-run the `pom.xml` generation command whenever the pom is changed.
 You also have to pay attention not to change the `pom.xml` files as they are generated in this case.
 
-https://raw.githubusercontent.com/jamalrepo/pom/main/pom.jim
-https://raw.githubusercontent.com/jamalrepo/pom/main/plugins/compiler.jim
+The drawback of Jamalifying the pom files is that there is no IDE support to edit the code.
+Sometimes it is more work to get a working version as the macros introduce an extra step.
+In the long run, the build files are easier to maintain; according to my practice.
+It is easier to add a new module to a multi-module project, or find, modify some configuration.
+The `.jam` source is shorter than the XML, which is relatively verbose and makes it more readable.
+Using Jamal only to avoid multiple definitions of properties and versions is a weak argument.
+
+Maven provides some simple "macro" possibilities with dependency, plugin, etc., management configuration.
+You can also define properties for different versions to avoid repetitions.
+There is one version that you cannot define this way.
+It is the parent project version.
+Many times the version is the same for all the modules as well as for the parent.
+The version maintenance can be automated using this approach.
+Again: this alone does not justify the extra step in the build chain.
+
+I recommend this approach when the project structure is at least two levels, and you have very similar POM files.
