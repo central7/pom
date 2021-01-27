@@ -1,0 +1,1750 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<traces>
+    <trace hasException="true">
+        <record name="import" type="MACRO" level="1" index="1">
+            <position column="2" line="1" file="./test/project.xml.jam"/>
+            <input>
+                <![CDATA[@import ../pom.jim]]>
+            </input>
+            <result></result>
+            <records>
+                <record type="TEXT" level="2" index="1">
+                    <position column="1" line="1" file="pom.jim"/>
+                    <text>
+                        <![CDATA[This file defines the macros that can be used to set up a pom.xml.jam file.
+
+This is a file imported and everything that is not a macro, like this text, will be discarded by Jamal, thus it is
+essentially comment.
+
+When this file is imported the macro start and end strings should be the characters U+007B and U+007D as you can see in
+the code below.
+
+In the comment parts the examples are using the [ and the ] characters as macro start and macro end strings.
+
+To import this file the pom.xml.jam file should use the macro
+
+   [@import ../pom.jim]
+
+and this file as a resource should be available on the class path.
+
+------------------------------------------------------------------------------------------------------------------------
+
+The macros can handle optional parameters, like GAV that stands for GroupId, ArtifactId Version, but it also can handle
+scope optionally. Therefore the use of these macros is lenient.
+
+]]>
+                    </text>
+                </record>
+                <record name="options" type="MACRO" level="2" index="2">
+                    <position column="2" line="22" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@options lenient]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="3">
+                    <position column="19" line="22" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+You start a project definition with the name and at the end of the file there is an [end project].
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="4">
+                    <position column="2" line="27" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define project($name)=
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>$name</name>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="5">
+                    <position column="26" line="31" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Tags that contain a lot of elements inside are supported by macros that start only the tag. These tags have to be closed
+with an [end tag] element. For example
+
+[project name]
+
+  the whole content of the jamalified pom file
+
+[end project]
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="6">
+                    <position column="2" line="44" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define end($x)=</$x>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="7">
+                    <position column="24" line="44" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+The tags listed below in the for loop can be used in two different ways. Either as
+
+    [tag
+          some
+          content
+          here
+    ]
+
+or as
+
+   [tag]
+          some
+          content
+          here
+   [end tag]
+
+if there is a lot of content and it is more readable to have an end tag. If you want to have a <tag></tag> with no
+content then you just write <tag></tag> or <tag/>. There is no need for a macro if it makes nothing better.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="8">
+                    <position column="2" line="67" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define $forsep=\s*,\s*]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="9">
+                    <position column="26" line="67" file="pom.jim"/>
+                    <text>
+                        <![CDATA[ this lets us to split the list of the tags into multiple lines
+
+Define all the macros that are to be used as XML tags. After that instead of writing
+
+                   <long_tag_nam>some long content</long_tag_name>
+
+you write [long_tag_nam some long content] (where [ and ] are the actual macro brackets).
+
+Because the macro "eval" is preceded with the character # first the macro "for" is evaluated
+the result (output) of the macro "for" is a series of "define" macros. Each defines a new macro
+with the name of the tag. When this is ready then this output is processed by the macro "eval"
+essentially executing the "define" macros and at this point the tags are defined as macros.
+
+]]>
+                    </text>
+                </record>
+                <record type="MACRO" level="2" index="10">
+                    <position column="2" line="80" file="pom.jim"/>
+                    <result>
+                        <error/>
+                    </result>
+                </record>
+                <record type="TEXT" level="2" index="11">
+                    <position column="46" line="120" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+------------------------------------------------------------------------------------------------------------------------
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="12">
+                    <position column="2" line="122" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define repository($id,$url)=<repository><id>$id</id><url>$url</url></repository>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="13">
+                    <position column="84" line="122" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="14">
+                    <position column="2" line="123" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define profile($id)=<profile><id>$id</id>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="15">
+                    <position column="45" line="123" file="pom.jim"/>
+                    <text>
+                        <![CDATA[ end a profile with an [end profile]
+------------------------------------------------------------------------------------------------------------------------
+
+The GAV macro can be used to define groupId, artifactId and version tags for the project. Each of the elements may be
+missing, it is checked by the macro definitions using the 'if' macro. It is recommended to use : as argument separators
+for this macro in the pom.xml.jam
+
+The macro also defines the user defined macros GROUP_ID, ARTIFACT_ID and VERSION that is used by other macros, like
+parent, when the group id, artifact id or version is not defined. Usually the parent has the same groupId and version
+as a subproject.
+
+To skip the groupId, for example, you can write [GAV ::artifa-ct:1.0.0]
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="16">
+                    <position column="2" line="136" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define GAV($groupId,$artifactId,$version)=
+    {#if|$groupId|{groupId $groupId}}{@define GROUP_ID=$groupId}
+    {#if|$artifactId|{artifactId $artifactId}}{@define ARTIFACT_ID=$artifactId}
+    {#if|$version|{version $version}}{@define VERSION=$version}
+]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="17">
+                    <position column="2" line="140" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="18">
+                    <position column="2" line="144" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define parent($groupId,$artifactId,$version)=<parent>
+    {groupId {#if|$groupId|$groupId|{GROUP_ID}}}
+    {artifactId {#if|$artifactId|$artifactId|{ARTIFACT_ID}}}
+    {version {#if|$version|$version|{VERSION}}}
+</parent>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="19">
+                    <position column="11" line="148" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define a dependency. The arguments are the ... you see. Each of the arguments are
+optional. If one is missing there will be no corresponding XML tag generated.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="20">
+                    <position column="2" line="155" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define dependency($groupId,$artifactId,$version,$scope)=
+<dependency>
+    {#if|$groupId|{groupId $groupId}}
+    {#if|$artifactId|{artifactId $artifactId}}
+    {#if|$version|{version $version}}
+    {#if|$scope|{scope $scope}}
+</dependency>
+]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="21">
+                    <position column="2" line="162" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this marco to define the modules in a multi module project parent pom.xml.jam. Simply list the names of the modules
+comma separated, like [modules module1,module2,module3]
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="22">
+                    <position column="2" line="169" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define modules($Z)=<modules>{@for $M in ($Z)=<module>$M</module>}</modules>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="23">
+                    <position column="79" line="169" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define a license type with the name and the URL. There is no support in this macro package to specify multiple licenses.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="24">
+                    <position column="2" line="175" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define license($name,$url)=<licenses><license><name>$name</name><url>$url</url></license></licenses>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="25">
+                    <position column="104" line="175" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define that the source encoding is whatever it is. Usually UTF8. If there is no argument to the macro
+then the encoding will be UTF-8.
+
+NOTE that this
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="26">
+                    <position column="2" line="186" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define sourceEncoding($x)=
+<properties>
+    <project.build.sourceEncoding>{#if |$x|$x|UTF-8}</project.build.sourceEncoding>
+</properties>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="27">
+                    <position column="15" line="189" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="28">
+                    <position column="2" line="191" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define properties($x)={@define sourceEncoding($y)=<project.build.sourceEncoding>{#if |$y|$y|UTF-8}</project.build.sourceEncoding>}<properties>{#if|$x|
+$x
+</properties>}]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="29">
+                    <position column="16" line="193" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define properties inside the <properties> ...</properties> tags (for which you should use the
+[properties] macro. Use if this macro you can write
+
+         property(name,value)
+
+or just simply
+
+         prop(name,value)
+
+instead of
+
+         <name>value</name>
+
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="30">
+                    <position column="2" line="212" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define property($name,$value)=<$name>$value</$name>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="31">
+                    <position column="55" line="212" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="32">
+                    <position column="2" line="213" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define prop($name,$value)=<$name>$value</$name>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="33">
+                    <position column="51" line="213" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define a single developer. There is no need to specify the <developers></developers> tags or even to
+use the [developers ...] macro. If you want to us specify more than one developer then use the
+
+[developers]
+   [developer ...]
+   [developer ...]
+[end developers]
+
+construct. The use of the macro [developers] will overwrite the developer macro and after that it will not include the
+enclosing <developers> and </developers> tags.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="34">
+                    <position column="2" line="228" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define developer($name,$email)=<developers>
+    <developer>
+        <name>$name</name>
+        <email>$email</email>
+    </developer>
+</developers>]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="35">
+                    <position column="15" line="233" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="36">
+                    <position column="2" line="235" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define developers($y)=<developers>{@define developer($name,$email)=    <developer>
+        <name>$name</name>
+        <email>$email</email>
+    </developer>}]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="37">
+                    <position column="19" line="238" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define the scm connections when you project is on github. All you have to specify is the developer github name and the
+project github id.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="38">
+                    <position column="2" line="245" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define github($developer,$project)=
+    {scm|
+        {connection  scm:git:git://github.com/$developer/$project.git}
+        {developerConnection scm:git:ssh://github.com/$developer/$project.git}
+        {url https:/github.com/$developer/$project/tree/master}
+    }
+    {url https:/github.com/$developer/$project/tree/master}
+]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="39">
+                    <position column="2" line="252" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Defines an --add-opens and --add-exports options to the compiler. This may be needed when you use modules and the tests
+need reflective access. If you define the user defined macros MODULE_PREFIX and PACKAGE_PREFIX they will be used in
+fromt of the $module and $package parameters.
+
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="40">
+                    <position column="2" line="260" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define opens($module,$package,$to)=--add-opens {?MODULE_PREFIX}$module/{?PACKAGE_PREFIX}$package={#if/$to/$to/ALL-UNNAMED}]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="41">
+                    <position column="126" line="260" file="pom.jim"/>
+                    <text>
+                        <![CDATA[
+]]>
+                    </text>
+                </record>
+                <record name="define" type="MACRO" level="2" index="42">
+                    <position column="2" line="261" file="pom.jim"/>
+                    <input>
+                        <![CDATA[@define exports($module,$package,$to)=--add-exports {?MODULE_PREFIX}$module/{?PACKAGE_PREFIX}$package={#if/$to/$to/ALL-UNNAMED}]]>
+                    </input>
+                    <result></result>
+                </record>
+                <record type="TEXT" level="2" index="43">
+                    <position column="130" line="261" file="pom.jim"/>
+                    <text>
+                        <![CDATA[]]>
+                    </text>
+                </record>
+
+            </records>
+        </record>
+        <record type="TEXT" level="1" index="45">
+            <position column="21" line="1" file="./test/project.xml.jam"/>
+            <text>
+                <![CDATA[
+]]>
+            </text>
+        </record>
+        <record name="project" type="USER_DEFINED_MACRO" level="1" index="46">
+            <parameters>
+                <parameter><![CDATA[test]]></parameter>
+            </parameters>
+            <position column="2" line="2" file="./test/project.xml.jam"/>
+            <input>
+                <![CDATA[project test]]>
+            </input>
+            <evaluated>
+                <![CDATA[project test
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>test</name>]]>
+            </evaluated>
+            <result>
+                <![CDATA[
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>test</name>]]>
+            </result>
+            <records>
+                <record type="TEXT" level="2" index="46">
+                    <position column="10" line="2" file="./test/project.xml.jam"/>
+                    <text>
+                        <![CDATA[]]>
+                    </text>
+                </record>
+                <record type="TEXT" level="2" index="47">
+                    <position column="10" line="2" file="./test/project.xml.jam"/>
+                    <text>
+                        <![CDATA[]]>
+                    </text>
+                </record>
+
+            </records>
+        </record>
+        <record type="TEXT" level="1" index="49">
+            <position column="15" line="2" file="./test/project.xml.jam"/>
+            <text>
+                <![CDATA[
+ ]]>
+            </text>
+        </record>
+        <record type="USER_DEFINED_MACRO" level="1" index="50">
+            <position column="3" line="3" file="./test/project.xml.jam"/>
+            <input>
+                <![CDATA[packaging pom]]>
+            </input>
+            <evaluated>
+                <![CDATA[packaging pom]]>
+            </evaluated>
+            <result>
+                <error/>
+            </result>
+        </record>
+        <exception message="Macro 'packaging' is not defined. at ./test/project.xml.jam/3:3">
+            <![CDATA[javax0.jamal.api.BadSyntaxAt: Macro 'packaging' is not defined. at ./test/project.xml.jam/3:3
+	at javax0.jamal.engine.Processor.evalUserDefinedMacro(Processor.java:323)
+	at javax0.jamal.engine.Processor.evalMacro(Processor.java:256)
+	at javax0.jamal.engine.Processor.processMacro(Processor.java:209)
+	at javax0.jamal.engine.Processor.process(Processor.java:105)
+	at javax0.jamal.cmd.JamalMain.executeJamal(JamalMain.java:161)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)
+	at javax0.jamal.cmd.JamalMain.execute(JamalMain.java:142)
+	at javax0.jamal.cmd.JamalMain.main(JamalMain.java:126)
+]]>
+        </exception>
+    </trace>
+<trace>
+<record name="import" type="MACRO" level="1" index="1" >
+<position column="2" line="1" file="./test/project.xml.jam" /><input>
+<![CDATA[@import ../pom.jim]]>
+</input>
+<result></result>
+<records>
+<record type="TEXT" level="2" index="1" >
+<position column="1" line="1" file="pom.jim" /><text>
+<![CDATA[This file defines the macros that can be used to set up a pom.xml.jam file.
+
+This is a file imported and everything that is not a macro, like this text, will be discarded by Jamal, thus it is
+essentially comment.
+
+When this file is imported the macro start and end strings should be the characters U+007B and U+007D as you can see in
+the code below.
+
+In the comment parts the examples are using the [ and the ] characters as macro start and macro end strings.
+
+To import this file the pom.xml.jam file should use the macro
+
+   [@import ../pom.jim]
+
+and this file as a resource should be available on the class path.
+
+------------------------------------------------------------------------------------------------------------------------
+
+The macros can handle optional parameters, like GAV that stands for GroupId, ArtifactId Version, but it also can handle
+scope optionally. Therefore the use of these macros is lenient.
+
+]]>
+</text>
+</record>
+<record name="options" type="MACRO" level="2" index="2" >
+<position column="2" line="22" file="pom.jim" /><input>
+<![CDATA[@options lenient]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="3" >
+<position column="19" line="22" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+You start a project definition with the name and at the end of the file there is an [end project].
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="4" >
+<position column="2" line="27" file="pom.jim" /><input>
+<![CDATA[@define project($name)=
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>$name</name>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="5" >
+<position column="26" line="31" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Tags that contain a lot of elements inside are supported by macros that start only the tag. These tags have to be closed
+with an [end tag] element. For example
+
+[project name]
+
+  the whole content of the jamalified pom file
+
+[end project]
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="6" >
+<position column="2" line="44" file="pom.jim" /><input>
+<![CDATA[@define end($x)=</$x>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="7" >
+<position column="24" line="44" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+The tags listed below in the for loop can be used in two different ways. Either as
+
+    [tag
+          some
+          content
+          here
+    ]
+
+or as
+
+   [tag]
+          some
+          content
+          here
+   [end tag]
+
+if there is a lot of content and it is more readable to have an end tag. If you want to have a <tag></tag> with no
+content then you just write <tag></tag> or <tag/>. There is no need for a macro if it makes nothing better.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="8" >
+<position column="2" line="67" file="pom.jim" /><input>
+<![CDATA[@define $forsep=\s*,\s*]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="9" >
+<position column="26" line="67" file="pom.jim" /><text>
+<![CDATA[ this lets us to split the list of the tags into multiple lines
+
+Define all the macros that are to be used as XML tags. After that instead of writing
+
+                   <long_tag_nam>some long content</long_tag_name>
+
+you write [long_tag_nam some long content] (where [ and ] are the actual macro brackets).
+
+Because the macro "eval" is preceded with the character # first the macro "for" is evaluated
+the result (output) of the macro "for" is a series of "define" macros. Each defines a new macro
+with the name of the tag. When this is ready then this output is processed by the macro "eval"
+essentially executing the "define" macros and at this point the tags are defined as macros.
+
+]]>
+</text>
+</record>
+<record name="for" type="MACRO" level="2" index="10" >
+<position column="2" line="80" file="pom.jim" /><input>
+<![CDATA[@for $tag in (annotationProcessorPath,
+                annotationProcessorPaths,
+                annotationProcessor,
+                annotationProcessors,
+                argLine,
+                arg,
+                artifactId,
+                build,
+                compilerArgs,
+                configuration,
+                connection,
+                dependencies,
+                dependencyManagement,
+                description,
+                developerConnection,
+                directory,
+                encoding,
+                exclude,
+                excludes,
+                filtering,
+                goal,
+                goals,
+                groupId,
+                id,
+                packaging,
+                plugin,
+                pluginManagement,
+                plugins,
+                profile,
+                profiles,
+                release,
+                repositories,
+                resource,
+                resources,
+                scope,
+                scm,
+                source,
+                target,
+                url,
+                version)=
+{@define $tag($x)=<$tag>{#if |$x|$x</$tag>}}]]>
+</input>
+<result>
+<![CDATA[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]>
+</result>
+<records>
+<record type="TEXT" level="3" index="10" >
+<position column="6" line="80" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="11" >
+<position column="2" line="81" file="pom.jim" /><input>
+<![CDATA[@define annotationProcessorPath($x)=<annotationProcessorPath>{#if |$x|$x</annotationProcessorPath>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="12" >
+<position column="102" line="81" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="13" >
+<position column="2" line="82" file="pom.jim" /><input>
+<![CDATA[@define annotationProcessorPaths($x)=<annotationProcessorPaths>{#if |$x|$x</annotationProcessorPaths>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="14" >
+<position column="105" line="82" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="15" >
+<position column="2" line="83" file="pom.jim" /><input>
+<![CDATA[@define annotationProcessor($x)=<annotationProcessor>{#if |$x|$x</annotationProcessor>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="16" >
+<position column="90" line="83" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="17" >
+<position column="2" line="84" file="pom.jim" /><input>
+<![CDATA[@define annotationProcessors($x)=<annotationProcessors>{#if |$x|$x</annotationProcessors>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="18" >
+<position column="93" line="84" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="19" >
+<position column="2" line="85" file="pom.jim" /><input>
+<![CDATA[@define argLine($x)=<argLine>{#if |$x|$x</argLine>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="20" >
+<position column="54" line="85" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="21" >
+<position column="2" line="86" file="pom.jim" /><input>
+<![CDATA[@define arg($x)=<arg>{#if |$x|$x</arg>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="22" >
+<position column="42" line="86" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="23" >
+<position column="2" line="87" file="pom.jim" /><input>
+<![CDATA[@define artifactId($x)=<artifactId>{#if |$x|$x</artifactId>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="24" >
+<position column="63" line="87" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="25" >
+<position column="2" line="88" file="pom.jim" /><input>
+<![CDATA[@define build($x)=<build>{#if |$x|$x</build>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="26" >
+<position column="48" line="88" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="27" >
+<position column="2" line="89" file="pom.jim" /><input>
+<![CDATA[@define compilerArgs($x)=<compilerArgs>{#if |$x|$x</compilerArgs>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="28" >
+<position column="69" line="89" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="29" >
+<position column="2" line="90" file="pom.jim" /><input>
+<![CDATA[@define configuration($x)=<configuration>{#if |$x|$x</configuration>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="30" >
+<position column="72" line="90" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="31" >
+<position column="2" line="91" file="pom.jim" /><input>
+<![CDATA[@define connection($x)=<connection>{#if |$x|$x</connection>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="32" >
+<position column="63" line="91" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="33" >
+<position column="2" line="92" file="pom.jim" /><input>
+<![CDATA[@define dependencies($x)=<dependencies>{#if |$x|$x</dependencies>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="34" >
+<position column="69" line="92" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="35" >
+<position column="2" line="93" file="pom.jim" /><input>
+<![CDATA[@define dependencyManagement($x)=<dependencyManagement>{#if |$x|$x</dependencyManagement>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="36" >
+<position column="93" line="93" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="37" >
+<position column="2" line="94" file="pom.jim" /><input>
+<![CDATA[@define description($x)=<description>{#if |$x|$x</description>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="38" >
+<position column="66" line="94" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="39" >
+<position column="2" line="95" file="pom.jim" /><input>
+<![CDATA[@define developerConnection($x)=<developerConnection>{#if |$x|$x</developerConnection>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="40" >
+<position column="90" line="95" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="41" >
+<position column="2" line="96" file="pom.jim" /><input>
+<![CDATA[@define directory($x)=<directory>{#if |$x|$x</directory>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="42" >
+<position column="60" line="96" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="43" >
+<position column="2" line="97" file="pom.jim" /><input>
+<![CDATA[@define encoding($x)=<encoding>{#if |$x|$x</encoding>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="44" >
+<position column="57" line="97" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="45" >
+<position column="2" line="98" file="pom.jim" /><input>
+<![CDATA[@define exclude($x)=<exclude>{#if |$x|$x</exclude>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="46" >
+<position column="54" line="98" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="47" >
+<position column="2" line="99" file="pom.jim" /><input>
+<![CDATA[@define excludes($x)=<excludes>{#if |$x|$x</excludes>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="48" >
+<position column="57" line="99" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="49" >
+<position column="2" line="100" file="pom.jim" /><input>
+<![CDATA[@define filtering($x)=<filtering>{#if |$x|$x</filtering>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="50" >
+<position column="60" line="100" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="51" >
+<position column="2" line="101" file="pom.jim" /><input>
+<![CDATA[@define goal($x)=<goal>{#if |$x|$x</goal>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="52" >
+<position column="45" line="101" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="53" >
+<position column="2" line="102" file="pom.jim" /><input>
+<![CDATA[@define goals($x)=<goals>{#if |$x|$x</goals>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="54" >
+<position column="48" line="102" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="55" >
+<position column="2" line="103" file="pom.jim" /><input>
+<![CDATA[@define groupId($x)=<groupId>{#if |$x|$x</groupId>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="56" >
+<position column="54" line="103" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="57" >
+<position column="2" line="104" file="pom.jim" /><input>
+<![CDATA[@define id($x)=<id>{#if |$x|$x</id>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="58" >
+<position column="39" line="104" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="59" >
+<position column="2" line="105" file="pom.jim" /><input>
+<![CDATA[@define packaging($x)=<packaging>{#if |$x|$x</packaging>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="60" >
+<position column="60" line="105" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="61" >
+<position column="2" line="106" file="pom.jim" /><input>
+<![CDATA[@define plugin($x)=<plugin>{#if |$x|$x</plugin>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="62" >
+<position column="51" line="106" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="63" >
+<position column="2" line="107" file="pom.jim" /><input>
+<![CDATA[@define pluginManagement($x)=<pluginManagement>{#if |$x|$x</pluginManagement>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="64" >
+<position column="81" line="107" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="65" >
+<position column="2" line="108" file="pom.jim" /><input>
+<![CDATA[@define plugins($x)=<plugins>{#if |$x|$x</plugins>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="66" >
+<position column="54" line="108" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="67" >
+<position column="2" line="109" file="pom.jim" /><input>
+<![CDATA[@define profile($x)=<profile>{#if |$x|$x</profile>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="68" >
+<position column="54" line="109" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="69" >
+<position column="2" line="110" file="pom.jim" /><input>
+<![CDATA[@define profiles($x)=<profiles>{#if |$x|$x</profiles>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="70" >
+<position column="57" line="110" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="71" >
+<position column="2" line="111" file="pom.jim" /><input>
+<![CDATA[@define release($x)=<release>{#if |$x|$x</release>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="72" >
+<position column="54" line="111" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="73" >
+<position column="2" line="112" file="pom.jim" /><input>
+<![CDATA[@define repositories($x)=<repositories>{#if |$x|$x</repositories>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="74" >
+<position column="69" line="112" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="75" >
+<position column="2" line="113" file="pom.jim" /><input>
+<![CDATA[@define resource($x)=<resource>{#if |$x|$x</resource>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="76" >
+<position column="57" line="113" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="77" >
+<position column="2" line="114" file="pom.jim" /><input>
+<![CDATA[@define resources($x)=<resources>{#if |$x|$x</resources>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="78" >
+<position column="60" line="114" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="79" >
+<position column="2" line="115" file="pom.jim" /><input>
+<![CDATA[@define scope($x)=<scope>{#if |$x|$x</scope>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="80" >
+<position column="48" line="115" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="81" >
+<position column="2" line="116" file="pom.jim" /><input>
+<![CDATA[@define scm($x)=<scm>{#if |$x|$x</scm>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="82" >
+<position column="42" line="116" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="83" >
+<position column="2" line="117" file="pom.jim" /><input>
+<![CDATA[@define source($x)=<source>{#if |$x|$x</source>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="84" >
+<position column="51" line="117" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="85" >
+<position column="2" line="118" file="pom.jim" /><input>
+<![CDATA[@define target($x)=<target>{#if |$x|$x</target>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="86" >
+<position column="51" line="118" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="87" >
+<position column="2" line="119" file="pom.jim" /><input>
+<![CDATA[@define url($x)=<url>{#if |$x|$x</url>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="3" index="88" >
+<position column="42" line="119" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="3" index="89" >
+<position column="2" line="120" file="pom.jim" /><input>
+<![CDATA[@define version($x)=<version>{#if |$x|$x</version>}]]>
+</input>
+<result></result>
+</record>
+
+</records>
+</record>
+<record type="TEXT" level="2" index="91" >
+<position column="46" line="120" file="pom.jim" /><text>
+<![CDATA[
+------------------------------------------------------------------------------------------------------------------------
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="92" >
+<position column="2" line="122" file="pom.jim" /><input>
+<![CDATA[@define repository($id,$url)=<repository><id>$id</id><url>$url</url></repository>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="93" >
+<position column="84" line="122" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="94" >
+<position column="2" line="123" file="pom.jim" /><input>
+<![CDATA[@define profile($id)=<profile><id>$id</id>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="95" >
+<position column="45" line="123" file="pom.jim" /><text>
+<![CDATA[ end a profile with an [end profile]
+------------------------------------------------------------------------------------------------------------------------
+
+The GAV macro can be used to define groupId, artifactId and version tags for the project. Each of the elements may be
+missing, it is checked by the macro definitions using the 'if' macro. It is recommended to use : as argument separators
+for this macro in the pom.xml.jam
+
+The macro also defines the user defined macros GROUP_ID, ARTIFACT_ID and VERSION that is used by other macros, like
+parent, when the group id, artifact id or version is not defined. Usually the parent has the same groupId and version
+as a subproject.
+
+To skip the groupId, for example, you can write [GAV ::artifa-ct:1.0.0]
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="96" >
+<position column="2" line="136" file="pom.jim" /><input>
+<![CDATA[@define GAV($groupId,$artifactId,$version)=
+    {#if|$groupId|{groupId $groupId}}{@define GROUP_ID=$groupId}
+    {#if|$artifactId|{artifactId $artifactId}}{@define ARTIFACT_ID=$artifactId}
+    {#if|$version|{version $version}}{@define VERSION=$version}
+]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="97" >
+<position column="2" line="140" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="98" >
+<position column="2" line="144" file="pom.jim" /><input>
+<![CDATA[@define parent($groupId,$artifactId,$version)=<parent>
+    {groupId {#if|$groupId|$groupId|{GROUP_ID}}}
+    {artifactId {#if|$artifactId|$artifactId|{ARTIFACT_ID}}}
+    {version {#if|$version|$version|{VERSION}}}
+</parent>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="99" >
+<position column="11" line="148" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define a dependency. The arguments are the ... you see. Each of the arguments are
+optional. If one is missing there will be no corresponding XML tag generated.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="100" >
+<position column="2" line="155" file="pom.jim" /><input>
+<![CDATA[@define dependency($groupId,$artifactId,$version,$scope)=
+<dependency>
+    {#if|$groupId|{groupId $groupId}}
+    {#if|$artifactId|{artifactId $artifactId}}
+    {#if|$version|{version $version}}
+    {#if|$scope|{scope $scope}}
+</dependency>
+]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="101" >
+<position column="2" line="162" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this marco to define the modules in a multi module project parent pom.xml.jam. Simply list the names of the modules
+comma separated, like [modules module1,module2,module3]
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="102" >
+<position column="2" line="169" file="pom.jim" /><input>
+<![CDATA[@define modules($Z)=<modules>{@for $M in ($Z)=<module>$M</module>}</modules>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="103" >
+<position column="79" line="169" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define a license type with the name and the URL. There is no support in this macro package to specify multiple licenses.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="104" >
+<position column="2" line="175" file="pom.jim" /><input>
+<![CDATA[@define license($name,$url)=<licenses><license><name>$name</name><url>$url</url></license></licenses>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="105" >
+<position column="104" line="175" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define that the source encoding is whatever it is. Usually UTF8. If there is no argument to the macro
+then the encoding will be UTF-8.
+
+NOTE that this
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="106" >
+<position column="2" line="186" file="pom.jim" /><input>
+<![CDATA[@define sourceEncoding($x)=
+<properties>
+    <project.build.sourceEncoding>{#if |$x|$x|UTF-8}</project.build.sourceEncoding>
+</properties>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="107" >
+<position column="15" line="189" file="pom.jim" /><text>
+<![CDATA[
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="108" >
+<position column="2" line="191" file="pom.jim" /><input>
+<![CDATA[@define properties($x)={@define sourceEncoding($y)=<project.build.sourceEncoding>{#if |$y|$y|UTF-8}</project.build.sourceEncoding>}<properties>{#if|$x|
+$x
+</properties>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="109" >
+<position column="16" line="193" file="pom.jim" /><text>
+<![CDATA[
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define properties inside the <properties> ...</properties> tags (for which you should use the
+[properties] macro. Use if this macro you can write
+
+         property(name,value)
+
+or just simply
+
+         prop(name,value)
+
+instead of
+
+         <name>value</name>
+
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="110" >
+<position column="2" line="212" file="pom.jim" /><input>
+<![CDATA[@define property($name,$value)=<$name>$value</$name>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="111" >
+<position column="55" line="212" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="112" >
+<position column="2" line="213" file="pom.jim" /><input>
+<![CDATA[@define prop($name,$value)=<$name>$value</$name>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="113" >
+<position column="51" line="213" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Use this macro to define a single developer. There is no need to specify the <developers></developers> tags or even to
+use the [developers ...] macro. If you want to us specify more than one developer then use the
+
+[developers]
+   [developer ...]
+   [developer ...]
+[end developers]
+
+construct. The use of the macro [developers] will overwrite the developer macro and after that it will not include the
+enclosing <developers> and </developers> tags.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="114" >
+<position column="2" line="228" file="pom.jim" /><input>
+<![CDATA[@define developer($name,$email)=<developers>
+    <developer>
+        <name>$name</name>
+        <email>$email</email>
+    </developer>
+</developers>]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="115" >
+<position column="15" line="233" file="pom.jim" /><text>
+<![CDATA[
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="116" >
+<position column="2" line="235" file="pom.jim" /><input>
+<![CDATA[@define developers($y)=<developers>{@define developer($name,$email)=    <developer>
+        <name>$name</name>
+        <email>$email</email>
+    </developer>}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="117" >
+<position column="19" line="238" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Define the scm connections when you project is on github. All you have to specify is the developer github name and the
+project github id.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="118" >
+<position column="2" line="245" file="pom.jim" /><input>
+<![CDATA[@define github($developer,$project)=
+    {scm|
+        {connection  scm:git:git://github.com/$developer/$project.git}
+        {developerConnection scm:git:ssh://github.com/$developer/$project.git}
+        {url https:/github.com/$developer/$project/tree/master}
+    }
+    {url https:/github.com/$developer/$project/tree/master}
+]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="119" >
+<position column="2" line="252" file="pom.jim" /><text>
+<![CDATA[
+
+------------------------------------------------------------------------------------------------------------------------
+
+Defines an --add-opens and --add-exports options to the compiler. This may be needed when you use modules and the tests
+need reflective access. If you define the user defined macros MODULE_PREFIX and PACKAGE_PREFIX they will be used in
+fromt of the $module and $package parameters.
+
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="120" >
+<position column="2" line="260" file="pom.jim" /><input>
+<![CDATA[@define opens($module,$package,$to)=--add-opens {?MODULE_PREFIX}$module/{?PACKAGE_PREFIX}$package={#if/$to/$to/ALL-UNNAMED}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="121" >
+<position column="126" line="260" file="pom.jim" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="define" type="MACRO" level="2" index="122" >
+<position column="2" line="261" file="pom.jim" /><input>
+<![CDATA[@define exports($module,$package,$to)=--add-exports {?MODULE_PREFIX}$module/{?PACKAGE_PREFIX}$package={#if/$to/$to/ALL-UNNAMED}]]>
+</input>
+<result></result>
+</record>
+<record type="TEXT" level="2" index="123" >
+<position column="130" line="261" file="pom.jim" /><text>
+<![CDATA[]]>
+</text>
+</record>
+
+</records>
+</record>
+<record type="TEXT" level="1" index="125" >
+<position column="21" line="1" file="./test/project.xml.jam" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="project" type="USER_DEFINED_MACRO" level="1" index="126" >
+<parameters><parameter><![CDATA[test]]></parameter></parameters><position column="2" line="2" file="./test/project.xml.jam" /><input>
+<![CDATA[project test]]>
+</input>
+<evaluated>
+<![CDATA[project test
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>test</name>]]>
+</evaluated>
+<result>
+<![CDATA[
+  <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <modelVersion>4.0.0</modelVersion>
+      <name>test</name>]]>
+</result>
+<records>
+<record type="TEXT" level="2" index="126" >
+<position column="10" line="2" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+<record type="TEXT" level="2" index="127" >
+<position column="10" line="2" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+
+</records>
+</record>
+<record type="TEXT" level="1" index="129" >
+<position column="15" line="2" file="./test/project.xml.jam" /><text>
+<![CDATA[
+ ]]>
+</text>
+</record>
+<record name="packaging" type="USER_DEFINED_MACRO" level="1" index="130" >
+<parameters><parameter><![CDATA[pom]]></parameter></parameters><position column="3" line="3" file="./test/project.xml.jam" /><input>
+<![CDATA[packaging pom]]>
+</input>
+<evaluated>
+<![CDATA[packaging pom<packaging>pom</packaging>]]>
+</evaluated>
+<result>
+<![CDATA[<packaging>pom</packaging>]]>
+</result>
+<records>
+<record type="TEXT" level="2" index="130" >
+<position column="13" line="3" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+<record type="TEXT" level="2" index="131" >
+<position column="13" line="3" file="./test/project.xml.jam" /><text>
+<![CDATA[<packaging>]]>
+</text>
+</record>
+<record name="if" type="MACRO" level="2" index="132" >
+<position column="25" line="3" file="./test/project.xml.jam" /><input>
+<![CDATA[#if |pom|pom</packaging>]]>
+</input>
+<evaluated>
+<![CDATA[#if |pom|pom</packaging>]]>
+</evaluated>
+<result>
+<![CDATA[pom</packaging>]]>
+</result>
+<records>
+<record type="TEXT" level="3" index="132" >
+<position column="25" line="3" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+
+</records>
+</record>
+
+</records>
+</record>
+<record type="TEXT" level="1" index="135" >
+<position column="17" line="3" file="./test/project.xml.jam" /><text>
+<![CDATA[
+]]>
+</text>
+</record>
+<record name="end" type="USER_DEFINED_MACRO" level="1" index="136" >
+<parameters><parameter><![CDATA[project]]></parameter></parameters><position column="2" line="4" file="./test/project.xml.jam" /><input>
+<![CDATA[end project]]>
+</input>
+<evaluated>
+<![CDATA[end project</project>]]>
+</evaluated>
+<result>
+<![CDATA[</project>]]>
+</result>
+<records>
+<record type="TEXT" level="2" index="136" >
+<position column="6" line="4" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+<record type="TEXT" level="2" index="137" >
+<position column="6" line="4" file="./test/project.xml.jam" /><text>
+<![CDATA[]]>
+</text>
+</record>
+
+</records>
+</record>
+</trace>
+</traces>
