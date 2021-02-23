@@ -121,6 +121,7 @@ essentially executing the "define" macros and at this point the tags are defined
                 resources,
                 scm,
                 scope,
+                type,
                 show,
                 source,
                 target,
@@ -171,12 +172,13 @@ To skip the groupId, for example, you can write [GAV ::artifa-ct:1.0.0]
 Define a dependency. The arguments are the ... you see. Each of the arguments are
 optional. If one is missing there will be no corresponding XML tag generated.
 
-{@define dependency($groupId,$artifactId,$version,$scope)=
+{@define dependency($groupId,$artifactId,$version,$scope,$type)=
 <dependency>
     {#if|$groupId|{groupId $groupId}}
     {#if|$artifactId|{artifactId $artifactId}}
     {#if|$version|{version $version}}
     {#if|$scope|{scope $scope}}
+    {#if|$type|{type $type}}
 </dependency>
 }
 
